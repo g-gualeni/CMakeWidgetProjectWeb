@@ -1,0 +1,7 @@
+CMakeWidgetProject-macOS/*
+CMakeWidgetProject-Win*
+build-CMakeWidgetProject-*
+
+
+/CMakeWidgetProject/CMakeLists.txt.user
+*.txt.user*

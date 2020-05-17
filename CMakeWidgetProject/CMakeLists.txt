@@ -39,6 +39,9 @@ else()
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    CMakeWidgetProject-Doc.odt
+    CMakeWidgetProject-Doc.pdf
+    CMakeWidgetProject-res.qrc
   )
 endif()
 

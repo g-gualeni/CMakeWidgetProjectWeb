@@ -25,6 +25,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #endif()
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS TextToSpeech REQUIRED)
+
 
 if(ANDROID)
   add_library(CMakeWidgetProject SHARED
@@ -34,7 +36,7 @@ if(ANDROID)
     mainwindow.ui
   )
 else()
-  add_executable(CMakeWidgetProject
+    add_executable(CMakeWidgetProject
     main.cpp
     mainwindow.cpp
     mainwindow.h
@@ -46,3 +48,4 @@ else()
 endif()
 
 target_link_libraries(CMakeWidgetProject PRIVATE Qt5::Widgets)
+target_link_libraries(CMakeWidgetProject PRIVATE Qt5::TextToSpeech)

@@ -21,3 +21,9 @@ void MainWindow::on_cmdYouTube_clicked()
     QUrl youtube("https://youtu.be/R6kvF0nlahE");
     QDesktopServices::openUrl(youtube);
 }
+
+void MainWindow::on_cmdHello_clicked()
+{
+    m_engine.setLocale(QLocale(QLocale::Italian, QLocale::Italy));
+    m_engine.say("Buon Giorno, Gualeni Gianbattista!");
+}

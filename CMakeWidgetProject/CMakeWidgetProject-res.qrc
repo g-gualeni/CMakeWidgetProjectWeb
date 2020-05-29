@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>icons/icons8-play_button.png</file>
+        <file>icons/icons8-voice.png</file>
     </qresource>
 </RCC>

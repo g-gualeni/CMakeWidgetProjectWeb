@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTextToSpeech>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,7 +19,10 @@ public:
 private slots:
     void on_cmdYouTube_clicked();
 
+    void on_cmdHello_clicked();
+
 private:
     Ui::MainWindow *ui;
+    QTextToSpeech m_engine;
 };
 #endif // MAINWINDOW_H

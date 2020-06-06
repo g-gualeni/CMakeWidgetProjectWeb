@@ -7,6 +7,9 @@ How to create a Qt Widget Application using CMake, Qt 5.15, Qt Creator 4.12
 ### Change Log:
 Follow the development history below. For each release you can download the correspondent zip file.
 
+###### CMake-04: [App version](https://www.qtqb.it/2020/06/06/cmake-04-la-versione-dellapp/)
+I show here how we can use CMake to add the version to a macOS application 
+
 ###### CMake-03: [Text To Speech](https://www.qtqb.it/2020/05/30/cmake-03-text-to-speech/)
 
 https://github.com/g-gualeni/CMakeWidgetProjectWeb/releases/tag/CMAKE-03

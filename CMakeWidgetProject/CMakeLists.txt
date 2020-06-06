@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(CMakeWidgetProject LANGUAGES CXX)
+project(CMakeWidgetProject LANGUAGES CXX VERSION 1.2.3.4)
+
+set(LEGAL_COPYRIGHT "(C) 2020 www.GianbattistaGualeni.it")
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -10,6 +12,17 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_MACOSX_BUNDLE ON)
+set(MACOSX_BUNDLE_BUNDLE_NAME "${PROJECT_NAME}")
+set(MACOSX_BUNDLE_GUI_IDENTIFIER "${PROJECT_NAME}")
+set(MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}")
+set(MACOSX_BUNDLE_LONG_VERSION_STRING "${PROJECT_VERSION}")
+set(MACOSX_BUNDLE_SHORT_VERSION_STRING
+    "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}")
+set(MACOSX_BUNDLE_INFO_STRING "${PROJECT_NAME} - ${LEGAL_COPYRIGHT}")
+set(MACOSX_BUNDLE_COPYRIGHT ${LEGAL_COPYRIGHT})
+
 
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check http://doc.qt.io/qt-5/deployment-android.html for more information.
@@ -46,6 +59,11 @@ else()
     CMakeWidgetProject-res.qrc
   )
 endif()
+
+
+set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST
+    ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in)
+
 
 target_link_libraries(CMakeWidgetProject PRIVATE Qt5::Widgets)
 target_link_libraries(CMakeWidgetProject PRIVATE Qt5::TextToSpeech)

@@ -23,6 +23,8 @@ set(MACOSX_BUNDLE_SHORT_VERSION_STRING
 set(MACOSX_BUNDLE_INFO_STRING "${PROJECT_NAME} - ${LEGAL_COPYRIGHT}")
 set(MACOSX_BUNDLE_COPYRIGHT ${LEGAL_COPYRIGHT})
 
+set(RESOURCE_FILE "WinResources.rc")
+configure_file(${RESOURCE_FILE}.in ${RESOURCE_FILE})
 
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check http://doc.qt.io/qt-5/deployment-android.html for more information.
@@ -57,6 +59,7 @@ else()
     CMakeWidgetProject-Doc.odt
     CMakeWidgetProject-Doc.pdf
     CMakeWidgetProject-res.qrc
+    ${CMAKE_CURRENT_BINARY_DIR}/${RESOURCE_FILE}
   )
 endif()
 

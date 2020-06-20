@@ -7,6 +7,12 @@ How to create a Qt Widget Application using CMake, Qt 5.15, Qt Creator 4.12
 ## Change Log:
 Follow the development history below. For each release you can download the correspondent zip file.
 
+### CMake-06: [macOS Icon](https://www.qtqb.it/2020/06/20/cmake-06-licona-per-macos/)
+
+https://github.com/g-gualeni/CMakeWidgetProjectWeb/releases/tag/CMAKE-06
+Create a icns file and embed it into your application.
+
+
 ### CMake-05: [Exe version](https://www.qtqb.it/2020/06/13/cmake-05-la-versione-dellexe/)
 
 https://github.com/g-gualeni/CMakeWidgetProjectWeb/releases/tag/CMAKE-05

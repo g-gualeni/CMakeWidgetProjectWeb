@@ -26,6 +26,10 @@ set(MACOSX_BUNDLE_COPYRIGHT ${LEGAL_COPYRIGHT})
 set(RESOURCE_FILE "WinResources.rc")
 configure_file(${RESOURCE_FILE}.in ${RESOURCE_FILE})
 
+set(MACOSX_BUNDLE_ICON_FILE CMakeWidgetProject)
+set(MACOSX_ICON_FILE
+    ${CMAKE_CURRENT_SOURCE_DIR}/icons/${MACOSX_BUNDLE_ICON_FILE}.icns)
+
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check http://doc.qt.io/qt-5/deployment-android.html for more information.
 # They need to be set before the find_package(Qt5 ...) call.
@@ -60,12 +64,14 @@ else()
     CMakeWidgetProject-Doc.pdf
     CMakeWidgetProject-res.qrc
     ${CMAKE_CURRENT_BINARY_DIR}/${RESOURCE_FILE}
+    ${MACOSX_ICON_FILE}
   )
 endif()
 
-
 set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST
     ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in)
+set_source_files_properties(${MACOSX_ICON_FILE} PROPERTIES
+       MACOSX_PACKAGE_LOCATION "Resources")
 
 
 target_link_libraries(CMakeWidgetProject PRIVATE Qt5::Widgets)

@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include "dlgAbout.h"
 
 #include <QDesktopServices>
 #include <QUrl>
@@ -26,4 +27,10 @@ void MainWindow::on_cmdHello_clicked()
 {
     m_engine.setLocale(QLocale(QLocale::Italian, QLocale::Italy));
     m_engine.say("Buon Giorno, Gualeni Gianbattista!");
+}
+
+void MainWindow::on_cmdAbout_clicked()
+{
+    dlgAbout dlg(this);
+    dlg.exec();
 }

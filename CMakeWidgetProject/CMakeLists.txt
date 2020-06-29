@@ -27,10 +27,11 @@ set(WIN_APPLICATION_ICON "icons/satellite.ico")
 set(RESOURCE_FILE "WinResources.rc")
 configure_file(${RESOURCE_FILE}.in ${RESOURCE_FILE})
 
-
 set(MACOSX_BUNDLE_ICON_FILE CMakeWidgetProject)
 set(MACOSX_ICON_FILE
     ${CMAKE_CURRENT_SOURCE_DIR}/icons/${MACOSX_BUNDLE_ICON_FILE}.icns)
+
+configure_file(version.h.in version.h)
 
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check http://doc.qt.io/qt-5/deployment-android.html for more information.
@@ -67,6 +68,10 @@ else()
     CMakeWidgetProject-res.qrc
     ${CMAKE_CURRENT_BINARY_DIR}/${RESOURCE_FILE}
     ${MACOSX_ICON_FILE}
+    ${CMAKE_CURRENT_BINARY_DIR}/version.h
+    dlgAbout.cpp
+    dlgAbout.h
+    dlgAbout.ui
   )
 endif()
 

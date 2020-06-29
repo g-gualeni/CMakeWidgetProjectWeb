@@ -21,6 +21,8 @@ private slots:
 
     void on_cmdHello_clicked();
 
+    void on_cmdAbout_clicked();
+
 private:
     Ui::MainWindow *ui;
     QTextToSpeech m_engine;

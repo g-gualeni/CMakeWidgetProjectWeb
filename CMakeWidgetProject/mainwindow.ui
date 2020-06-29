@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>372</width>
-    <height>231</height>
+    <height>240</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,6 +40,23 @@
       <property name="icon">
        <iconset resource="CMakeWidgetProject-res.qrc">
         <normaloff>:/icons/icons8-voice.png</normaloff>:/icons/icons8-voice.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="cmdAbout">
+      <property name="text">
+       <string>About</string>
+      </property>
+      <property name="icon">
+       <iconset resource="CMakeWidgetProject-res.qrc">
+        <normaloff>:/icons/icons8-about.png</normaloff>:/icons/icons8-about.png</iconset>
       </property>
       <property name="iconSize">
        <size>

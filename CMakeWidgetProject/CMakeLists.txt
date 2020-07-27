@@ -80,6 +80,41 @@ set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST
 set_source_files_properties(${MACOSX_ICON_FILE} PROPERTIES
        MACOSX_PACKAGE_LOCATION "Resources")
 
-
 target_link_libraries(CMakeWidgetProject PRIVATE Qt5::Widgets)
 target_link_libraries(CMakeWidgetProject PRIVATE Qt5::TextToSpeech)
+
+# Creazione della cartella di destinazione
+if(CMAKE_BUILD_TYPE MATCHES "Release")
+
+    get_target_property(QMAKE_EXECUTABLE Qt5::qmake IMPORTED_LOCATION)
+
+    string(REGEX MATCH "Qt/.+bin" BUILD_PACK_01 ${QMAKE_EXECUTABLE})
+    string(REPLACE "64/bin" "64bit" BUILD_PACK_02 ${BUILD_PACK_01})
+    string(REPLACE "/bin" "_32bit" BUILD_PACK_03 ${BUILD_PACK_02})
+    string(REPLACE "/" "-" BUILD_PACK ${BUILD_PACK_03})
+
+    set(BASE_DEPLOY_FOLDER "${PROJECT_SOURCE_DIR}/../")
+
+    if(APPLE)
+        string(APPEND DEPLOY_FOLDER ${BASE_DEPLOY_FOLDER} ${PROJECT_NAME}
+            "-macOS-" ${BUILD_PACK} "/")
+        string(APPEND DEPLOY_FOLDER_BUNDLE ${DEPLOY_FOLDER} "/"
+            ${PROJECT_NAME} "-" ${PROJECT_VERSION} ".app")
+
+    elseif(UNIX)
+        string(APPEND DEPLOY_FOLDER ${BASE_DEPLOY_FOLDER} ${PROJECT_NAME}
+            "-Linux-" ${BUILD_PACK} "/")
+        string(APPEND DEPLOY_FOLDER_BUNDLE ${DEPLOY_FOLDER} "/"
+            ${PROJECT_NAME} "-" ${PROJECT_VERSION})
+
+    elseif(WIN32)
+        string(APPEND DEPLOY_FOLDER ${BASE_DEPLOY_FOLDER} ${PROJECT_NAME}
+            "-Win-" ${BUILD_PACK} "/")
+        string(APPEND DEPLOY_FOLDER_BUNDLE ${DEPLOY_FOLDER} "/"
+            ${PROJECT_NAME} "-" ${PROJECT_VERSION})
+
+    endif()
+
+    make_directory(${DEPLOY_FOLDER_BUNDLE})
+
+endif()

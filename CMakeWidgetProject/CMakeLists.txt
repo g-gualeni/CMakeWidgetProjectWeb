@@ -89,7 +89,7 @@ if(CMAKE_BUILD_TYPE MATCHES "Release")
     get_target_property(QMAKE_EXECUTABLE Qt5::qmake IMPORTED_LOCATION)
 
     string(REGEX MATCH "Qt/.+bin" BUILD_PACK_01 ${QMAKE_EXECUTABLE})
-    string(REPLACE "64/bin" "64bit" BUILD_PACK_02 ${BUILD_PACK_01})
+    string(REPLACE "_64/bin" "_64bit" BUILD_PACK_02 ${BUILD_PACK_01})
     string(REPLACE "/bin" "_32bit" BUILD_PACK_03 ${BUILD_PACK_02})
     string(REPLACE "/" "-" BUILD_PACK ${BUILD_PACK_03})
 

@@ -7,6 +7,11 @@ How to create a Qt Widget Application using CMake, Qt 5.15, Qt Creator 4.12
 ## Change Log:
 Follow the development history below. For each release you can download the correspondent zip file.
 
+### CMake-09: [ la cartella di rilascio](https://www.qtqb.it/2020/07/27/cmake-09-prepariamo-la-cartella-di-rilascio/)
+
+https://github.com/g-gualeni/CMakeWidgetProjectWeb/releases/tag/CMAKE-09
+Let's prepare a folder for the application deployment
+
 ### CMake-08: [About Page](https://www.qtqb.it/2020/07/04/cmake-08-una-finestra-about/)
 
 https://github.com/g-gualeni/CMakeWidgetProjectWeb/releases/tag/CMAKE-08

@@ -51,34 +51,34 @@ find_package(Qt5 COMPONENTS TextToSpeech REQUIRED)
 
 
 if(ANDROID)
-  add_library(CMakeWidgetProject SHARED
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-  )
+    add_library(CMakeWidgetProject SHARED
+        main.cpp
+        mainwindow.cpp
+        mainwindow.h
+        mainwindow.ui
+        )
 else()
     add_executable(CMakeWidgetProject
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-    CMakeWidgetProject-Doc.odt
-    CMakeWidgetProject-Doc.pdf
-    CMakeWidgetProject-res.qrc
-    ${CMAKE_CURRENT_BINARY_DIR}/${RESOURCE_FILE}
-    ${MACOSX_ICON_FILE}
-    ${CMAKE_CURRENT_BINARY_DIR}/version.h
-    dlgAbout.cpp
-    dlgAbout.h
-    dlgAbout.ui
-  )
+        main.cpp
+        mainwindow.cpp
+        mainwindow.h
+        mainwindow.ui
+        CMakeWidgetProject-Doc.odt
+        CMakeWidgetProject-Doc.pdf
+        CMakeWidgetProject-res.qrc
+        ${CMAKE_CURRENT_BINARY_DIR}/${RESOURCE_FILE}
+        ${MACOSX_ICON_FILE}
+        ${CMAKE_CURRENT_BINARY_DIR}/version.h
+        dlgAbout.cpp
+        dlgAbout.h
+        dlgAbout.ui
+        )
 endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST
     ${CMAKE_CURRENT_SOURCE_DIR}/Info.plist.in)
 set_source_files_properties(${MACOSX_ICON_FILE} PROPERTIES
-       MACOSX_PACKAGE_LOCATION "Resources")
+    MACOSX_PACKAGE_LOCATION "Resources")
 
 target_link_libraries(CMakeWidgetProject PRIVATE Qt5::Widgets)
 target_link_libraries(CMakeWidgetProject PRIVATE Qt5::TextToSpeech)
@@ -96,16 +96,28 @@ if(CMAKE_BUILD_TYPE MATCHES "Release")
     set(BASE_DEPLOY_FOLDER "${PROJECT_SOURCE_DIR}/../")
 
     if(APPLE)
-        string(APPEND DEPLOY_FOLDER ${BASE_DEPLOY_FOLDER} ${PROJECT_NAME}
-            "-macOS-" ${BUILD_PACK} "/")
+        string(APPEND DEPLOY_FOLDER ${BASE_DEPLOY_FOLDER}
+            ${PROJECT_NAME} "-macOS-" ${BUILD_PACK} "/")
         string(APPEND DEPLOY_FOLDER_BUNDLE ${DEPLOY_FOLDER} "/"
             ${PROJECT_NAME} "-" ${PROJECT_VERSION} ".app")
 
+        add_custom_command(TARGET ${CMAKE_PROJECT_NAME}
+            POST_BUILD COMMAND ${CMAKE_COMMAND} -E
+            copy_directory $<TARGET_BUNDLE_DIR:${CMAKE_PROJECT_NAME}>
+            ${DEPLOY_FOLDER_BUNDLE}
+            )
+
     elseif(UNIX)
-        string(APPEND DEPLOY_FOLDER ${BASE_DEPLOY_FOLDER} ${PROJECT_NAME}
-            "-Linux-" ${BUILD_PACK} "/")
+        string(APPEND DEPLOY_FOLDER ${BASE_DEPLOY_FOLDER}
+            ${PROJECT_NAME} "-Linux-" ${BUILD_PACK} "/")
         string(APPEND DEPLOY_FOLDER_BUNDLE ${DEPLOY_FOLDER} "/"
             ${PROJECT_NAME} "-" ${PROJECT_VERSION})
+
+        add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E
+            copy $<TARGET_FILE:${CMAKE_PROJECT_NAME}>
+            ${DEPLOY_FOLDER_BUNDLE}
+            )
 
     elseif(WIN32)
         string(APPEND DEPLOY_FOLDER ${BASE_DEPLOY_FOLDER} ${PROJECT_NAME}
@@ -113,8 +125,25 @@ if(CMAKE_BUILD_TYPE MATCHES "Release")
         string(APPEND DEPLOY_FOLDER_BUNDLE ${DEPLOY_FOLDER} "/"
             ${PROJECT_NAME} "-" ${PROJECT_VERSION})
 
+        add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E
+            copy $<TARGET_FILE:${CMAKE_PROJECT_NAME}>
+            "${DEPLOY_FOLDER_BUNDLE}"
+            )
+
     endif()
 
     make_directory(${DEPLOY_FOLDER_BUNDLE})
+
+    get_filename_component(QT_BIN_DIR "${QMAKE_EXECUTABLE}" DIRECTORY)
+    find_program(DEPLOYQT_EXECUTABLE windeployqt HINTS "${QT_BIN_DIR}")
+    find_program(DEPLOYQT_EXECUTABLE macdeployqt HINTS "${QT_BIN_DIR}")
+    if(DEPLOYQT_EXECUTABLE)
+        add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+            COMMAND "${CMAKE_COMMAND}" -E
+            env "${DEPLOYQT_EXECUTABLE}" "${DEPLOY_FOLDER_BUNDLE}"
+            )
+    endif()
+
 
 endif()
